@@ -14,11 +14,14 @@ import com.course.microservice.api.response.PlainMessage;
 public class CongratulationApi {
 
 	@GetMapping(value = "/{employee_id}")
-	public ResponseEntity<PlainMessage> congratulate(
-			@PathVariable(name = "employee_id", required = true) String employeeId,
-			@RequestParam(name = "event", defaultValue = "SECRET EVENT") String event) {
-		var message = "Congratulations ".concat(employeeId).concat(" for your ").concat(event)
-				.concat(". We are happy for you!");
+	public ResponseEntity<PlainMessage> congratulate( @PathVariable(name = "employee_id", required = true) String employeeId,
+		                                              @RequestParam(name = "event", defaultValue = "SECRET EVENT") String event) {
+
+		var message = "Congratulations ".concat(employeeId)
+				                               .concat(" for your ")
+				                               .concat(event)
+		                              		   .concat(". We are happy for you!");
+
 		var responseBody = new PlainMessage(message);
 
 		return ResponseEntity.ok().body(responseBody);

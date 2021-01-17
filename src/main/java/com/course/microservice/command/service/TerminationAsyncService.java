@@ -1,15 +1,14 @@
 package com.course.microservice.command.service;
 
-import java.time.LocalDate;
-
+import com.course.microservice.broker.message.MasterPayrollMessage;
+import com.course.microservice.broker.message.MasterPayrollResponseMessage;
+import com.course.microservice.broker.publisher.PayrollPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.course.microservice.broker.message.MasterPayrollMessage;
-import com.course.microservice.broker.message.MasterPayrollResponseMessage;
-import com.course.microservice.broker.publisher.PayrollPublisher;
+import java.time.LocalDate;
 
 @Service
 public class TerminationAsyncService {
@@ -20,8 +19,7 @@ public class TerminationAsyncService {
 	private PayrollPublisher payrollPublisher;
 
 	public boolean approveEmployeeTermination(String employeeId, LocalDate terminationDate) {
-		LOG.debug("[Async-publish] Simulating termination approval for employee : {}, termination date : {}",
-				employeeId, terminationDate);
+		LOG.debug("[Async-publish] Simulating termination approval for employee : {}, termination date : {}", employeeId, terminationDate);
 		LOG.debug("[Async-publish] Updating data on industrial relation microservice, termination status : PENDING");
 
 		try {
@@ -41,10 +39,13 @@ public class TerminationAsyncService {
 		}
 	}
 
+
 	public void finalizeEmployeeTerminationApproval(MasterPayrollResponseMessage responseMessage) {
-		LOG.debug(
-				"[Async-listen] Updating data on industrial relation microservice, termination status : APPROVED, for employee {}",
-				responseMessage.getEmployeeId());
+
+LOG.debug( "[Async-listen] Updating data on industrial relation microservice, termination status : APPROVED, for employee {}",
+		                                                                                       	responseMessage.getEmployeeId()
+    		);
+
 	}
 
 }

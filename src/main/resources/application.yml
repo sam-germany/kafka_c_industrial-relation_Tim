@@ -35,9 +35,9 @@ spring:
         prefer-ip-address: true
         health-check-path: /ping
   datasource:
-    url: "jdbc:mysql://localhost/industrial_relation?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
-    username: root
-    password: 1234
+    url: "jdbc:mysql://localhost:3306/industrial_relation"
+    username: user
+    password: userpassword
   jpa:
     show-sql: false
     hibernate:

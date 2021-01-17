@@ -21,9 +21,8 @@ public class TerminationAsyncApi {
 	private TerminationAsyncService terminationAsyncService;
 
 	@PostMapping(value = "/{employee_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TerminationApprovalResponse> approveEmployeeTermination(
-			@PathVariable(name = "employee_id", required = true) String employeeId,
-			@RequestBody(required = true) TerminationApprovalRequest requestBody) {
+	public ResponseEntity<TerminationApprovalResponse> approveEmployeeTermination(@PathVariable(name = "employee_id", required = true) String employeeId,
+		                                                                         @RequestBody(required = true) TerminationApprovalRequest requestBody) {
 
 		terminationAsyncService.approveEmployeeTermination(employeeId, requestBody.getTerminationDate());
 
